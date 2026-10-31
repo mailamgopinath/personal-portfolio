@@ -14,8 +14,16 @@ export default function Navbar() {
 
   const go = (e, id) => {
     e.preventDefault();
+    const wasOpen = open;
     setOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    // Wait for the mobile menu to finish collapsing, then scroll to an exact offset.
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
+      const top = id === 'home' ? 0 : el.getBoundingClientRect().top + window.scrollY - navH + 1;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, wasOpen ? 350 : 0);
   };
 
   return (

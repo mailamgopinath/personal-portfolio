@@ -241,6 +241,10 @@ button { font: inherit; cursor: pointer; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 960px) {
+  /* Backdrop blur on large animated cards glitches on mobile GPUs; use a tinted solid instead. */
+  .glass, .floater { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .glass { background: rgba(20, 28, 72, 0.6); }
+  .bg-orb { filter: blur(70px); }
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: block; }
   .mobile-menu { display: flex; }
